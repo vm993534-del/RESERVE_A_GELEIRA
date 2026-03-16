@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geleiras do Povo - Missão Solidária Gabriel Junior</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #004a99;
+            --secondary: #00a8e8;
+            --accent: #e63946;
+            --success: #2d6a4f;
+            --bg: #f8f9fa;
+            --dark: #1d3557;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg); color: var(--dark); line-height: 1.6; overflow-x: hidden; }
+
+        .urgencia {
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+        .headline {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--primary);
+            text-align: center;
+            margin: 25px 0;
+            line-height: 1.2;
+        }
+
+        .historia {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+
+        .img-box {
+            width: 100%;
+            background: #fff;
+            border: 2px solid var(--secondary);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .img-box img { width: 100%; display: block; height: auto; }
+        
+        .legenda-foto {
+            background: var(--primary);
+            color: white;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .provincias-banner {
+            background: linear-gradient(135deg, var(--dark) 0%, #002d5f 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 15px;
+            margin: 40px 0;
+            border: 2px solid var(--secondary);
+        }
+
+        .provincias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .provincias-grid span {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .oferta-final {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            border: 4px solid var(--success);
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-top: 50px;
+        }
+
+        .box-logistica {
+            background: #f8f9fa;
+            border: 2px dashed #ccc;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .preco-solidario {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: var(--success);
+            margin: 5px 0;
+            line-height: 1;
+        }
+
+        .form-checkout { text-align: left; margin-top: 30px; }
+        .label-form { font-weight: 600; margin-bottom: 5px; display: block; color: var(--primary); }
+
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .btn-pagar {
+            width: 100%;
+            background: var(--success);
+            color: white;
+            padding: 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 8px 15px rgba(45, 106, 79, 0.3);
+            text-align: center;
+        }
+
+        .btn-pagar:hover { transform: translateY(-2px); background: #1b4332; }
+
+        .btn-texto-principal {
+            font-size: 1.4rem;
+            font-weight: 900;
+            display: block;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .btn-texto-secundario {
+            font-size: 0.9rem;
+            font-weight: normal;
+            display: block;
+            opacity: 0.9;
+        }
+
+        .selo-seguranca {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #eee;
+        }
+
+        #popup-social {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            border-left: 6px solid var(--success);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .avatar-pop { background: var(--secondary); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="urgencia">⚠️ ATENÇÃO: RESTAM APENAS 24 UNIDADES SUBSIDIADAS PARA ESTA SEMANA</div>
+
+    <div class="container">
+        <div class="img-box">
+          <img src="GELADEIRA FAMILIA 1.png" alt="Família Moçambicana">
+        </div>
+
+        <h1 class="headline">O Filho do Povo Não Deixa Ninguém para Trás: Geleiras para Todos!</h1>
+
+        <section class="historia">
+            <h2>Mais do que um objeto, um gesto de amor.</h2>
+            <p>Gabriel Junior tem percorrido cada canto deste país e sentiu na pele o que muitas famílias passam. Não é justo que em pleno 2026, nossos irmãos percam comida ou bebam água quente por falta de condições.</p>
+            <p style="margin-top: 15px;"><strong>"Eu decidi que a minha missão é servir."</strong> Por isso, Gabriel negociou directamente com os fabricantes e assumiu 80% do valor. O que você paga é apenas uma taxa solidária para que a nossa logística continue rodando até à sua casa.</p>
+        </section>
+
+        <div class="img-box">
+            <img src="Gabriel junior1.png" alt="Gabriel Junior" style="width: 100%;">
+            <div class="legenda-foto">Já entregamos para centenas de famílias em Maputo e arredores!</div>
+        </div>
+
+        <section class="historia">
+            <p>Dona Fátima, da Maxixe, foi uma das contempladas. Ela nos contou que agora seus netos têm água fresca e os vegetais da sua pequena banca já não estragam no fim do dia. É esse impacto que queremos levar para você.</p>
+        </section>
+
+        <div class="img-box">
+            <img src="maxixe.png" alt="Entrega em Maxixe" style="width: 100%;">
+            <div class="legenda-foto">A felicidade de quem recebeu dignidade em casa.</div>
+        </div>
+
+        <div class="img-box">
+            <img src="GELEIRA.png" alt="Estoque de Geleiras" style="width: 100%;">
+            <div class="legenda-foto">Nosso estoque pronto para sair para as províncias.</div>
+        </div>
+
+        <div class="img-box">
+            <img src="entrega 2.png" alt="Logística Solidária" style="width: 100%;">
+            <div class="legenda-foto">Compromisso total com a transparência e o povo moçambicano.</div>
+        </div>
+
+        <div class="provincias-banner">
+            <h2 style="font-size: 1.8rem; margin-bottom: 10px;">🚛 LOGÍSTICA NACIONAL PRIORITÁRIA</h2>
+            <div class="provincias-grid">
+                <span>Maputo</span> <span>Gaza</span> <span>Inhambane</span> <span>Sofala</span> 
+                <span>Manica</span> <span>Tete</span> <span>Zambézia</span> <span>Nampula</span> 
+                <span>Niassa</span> <span>Cabo Delgado</span>
+            </div>
+        </div>
+
+        <section class="oferta-final">
+            <h2 style="color: var(--primary);">Confirmação de Envio</h2>
+            <p style="margin-top: 10px;">Preencha os dados abaixo para organizarmos a rota de entrega da sua geleira.</p>
+            
+            <div class="box-logistica">
+                <p style="font-weight: bold; color: var(--success); text-transform: uppercase; letter-spacing: 1px;">TAXA SOLIDÁRIA DE LOGÍSTICA</p>
+                <div class="preco-solidario">500 MT</div>
+                <p style="font-weight: 700;">Receba em casa com total comodidade</p>
+                <p style="font-size: 0.9rem; margin-top: 10px; color: #555;">
+                    Este valor cobre o transporte seguro de carga e a entrega personalizada feita pela nossa equipa técnica. Você não terá nenhum custo adicional além deste.
+                </p>
+            </div>
+
+            <div class="form-checkout">
+                <form action="https://pay.kambafy.com/checkout/b62c54d0-24b5-497c-8a25-4daa64408585">
+                    <label class="label-form">Nome de quem receberá a entrega:</label>
+                    <input type="text" class="input-field" placeholder="Nome Completo" required>
+                    
+                    <label class="label-form">Telemóvel para agendamento (M-Pesa/E-Mola):</label>
+                    <input type="tel" class="input-field" placeholder="84XXXXXXX ou 86XXXXXXX" required>
+
+                    <label class="label-form">Membros da Família:</label>
+                    <input type="number" class="input-field" placeholder="Quantas pessoas vivem na casa?" min="1" required>
+
+                    <label class="label-form">Endereço detalhado para entrega:</label>
+                    <textarea class="input-field" rows="3" placeholder="Sua Província, Bairro e um Ponto de Referência" required></textarea>
+
+                    <button type="submit" class="btn-pagar">
+                        <span class="btn-texto-principal">CLIQUE PARA O PAGAMENTO SEGURO</span>
+                        <span class="btn-texto-secundario">(M-Pesa / E-Mola / Transferência)</span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="selo-seguranca">
+                <span style="color: var(--success); font-weight: bold; display: flex; align-items: center; gap: 8px;">
+                    🛡️ PAGAMENTO 100% PROTEGIDO
+                </span>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 10px; max-width: 500px;">
+                    Após o pagamento, você receberá uma confirmação via SMS e nossa equipa de logística entrará em contacto em até 24h para agendar a hora exacta da entrega.
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <div id="popup-social">
+        <div class="avatar-pop" id="pop-letra">D</div>
+        <div class="texto-pop">
+            <span id="pop-nome" style="font-weight: bold;">Delfina</span> 
+            <span id="pop-acao"></span>
+        </div>
+    </div>
+
+    <script>
+        const nomes = ["Ana", "Mateus", "Célia", "Benjamim", "Isabel", "Júlio", "Beatriz", "Sérgio", "António", "Fátima", "Ricardo", "Elena", "Mário", "Sónia"];
+        const cidades = ["Maputo", "Beira", "Nampula", "Tete", "Quelimane", "Matola", "Chimoio", "Lichinga", "Xai-Xai", "Pemba"];
+        
+        // PROPORÇÃO: 3 de "Recebeu" (60%) e 2 de "Reservou" (40%)
+        const acoes = [
+            "Acabou de receber a sua geleira em casa!",
+            "Acabou de receber a sua geleira em casa!",
+            "Acabou de receber a sua geleira em casa!",
+            "acabou de fazer a sua reserva!",
+            "acabou de fazer a sua reserva!"
+        ];
+
+        function mostrarPopUp() {
+            const n = nomes[Math.floor(Math.random() * nomes.length)];
+            const c = cidades[Math.floor(Math.random() * cidades.length)];
+            const a = acoes[Math.floor(Math.random() * acoes.length)];
+            
+            document.getElementById('pop-nome').innerText = n + " de " + c;
+            document.getElementById('pop-letra').innerText = n.charAt(0);
+            document.getElementById('pop-acao').innerText = a;
+
+            const pop = document.getElementById('popup-social');
+            pop.style.display = 'flex';
+            setTimeout(() => { pop.style.display = 'none'; }, 5000);
+        }
+
+        setInterval(mostrarPopUp, 13000);
+        setTimeout(mostrarPopUp, 3000);
+    </script>
+</body>
+</html>
